@@ -6,8 +6,8 @@ Este repositório é dedicado aos códigos e projetos que vou desenvolver durant
 ## Conteúdo
 Nesta trilha, terei acesso a diversos conceitos, ferramentas e técnicas que serão aplicadas em projetos práticos. Alguns dos tópicos abordados incluem:
 
-Limpeza e pré-processamento de dados;
-Análise exploratória de dados;
-Visualização de dados;
-Modelagem de dados;
-Aplicação de algoritmos de machine learning.
+- Limpeza e pré-processamento de dados;
+- Análise exploratória de dados;
+- Visualização de dados;
+- Modelagem de dados;
+- Aplicação de algoritmos de machine learning.
