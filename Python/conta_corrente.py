@@ -11,8 +11,18 @@ class ContaCorrente:
         return "[>> Codigo {} Saldo {} <<]".format(self.codigo_conta, self.saldo)
     
 
-conta_da_day = ContaCorrente(26)
-print(conta_da_day)
-
+conta_da_day = ContaCorrente(57)
 conta_da_day.deposita(2548)
-print(conta_da_day)
+
+conta_do_luca = ContaCorrente(2765)
+conta_do_luca.deposita(1250)
+
+contas = [conta_da_day,conta_do_luca]
+print(contas[0],contas[1])
+
+def deposita_para_todos(contas):
+    for conta in contas: 
+        conta.deposita(200)
+
+deposita_para_todos(contas)
+print(contas[0],contas[1])
