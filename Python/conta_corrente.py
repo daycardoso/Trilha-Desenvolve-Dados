@@ -28,3 +28,10 @@ def deposita_para_todos(contas):
 
 deposita_para_todos(contas)
 print(contas[0],contas[1])
+
+contas = (conta_da_day,conta_do_luca)
+
+contas[0].deposita(300)
+
+for conta in contas:
+  print(conta)

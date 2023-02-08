@@ -12,7 +12,6 @@ class ContaBancaria:
         self.titular = titular
         self.numero_conta = numero_conta
         self.saldo = saldo
-        self.conta = [self.titular, self.numero_conta,self.saldo]
     
     def consulta(self):
         print("{} com conta numero({}) seu saldo atual: {} \n".format(self.titular,self.numero_conta,self.saldo))
