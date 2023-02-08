@@ -1,3 +1,4 @@
+# Exemplo dado em aula de Python Collections part 1
 class ContaCorrente:
     
     def __init__(self, codigo_conta):
@@ -18,7 +19,8 @@ conta_do_luca = ContaCorrente(2765)
 conta_do_luca.deposita(1250)
 
 contas = [conta_da_day,conta_do_luca]
-print(contas[0],contas[1])
+for conta in contas:
+  print(conta)
 
 def deposita_para_todos(contas):
     for conta in contas: 
