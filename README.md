@@ -1,5 +1,5 @@
 # Trilha Desenvolve - Dados do Grupo Boticário em parceria com a Alura
-Programa de formação e inclusão de talentos na tecnologia, 
+Programa de formação e inclusão de talentos na tecnologia
 ## Introdução
 Este repositório é dedicado aos códigos e projetos que vou desenvolver durante a Trilha Desenvolve - Dados do Grupo Boticário em parceria com a Alura. A trilha é composta por módulos que ensinam conceitos e técnicas avançadas de análise de dados, capacitando-nos a trabalhar com as demandas do mercado.
 
