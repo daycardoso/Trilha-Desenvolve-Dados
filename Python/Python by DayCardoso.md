@@ -1130,50 +1130,6 @@ Além disso, é possível usar vários outros métodos de tupla para realizar ta
 
 [3.11.1 Documentation](https://docs.python.org/pt-br/3/index.html)
 
-## Jogo de Adivinhação
-
-### Jogo de Adivinhação
-
-Um jogo de adivinhação é um jogo divertido no qual o jogador tenta adivinhar o resultado gerado aleatoriamente. O jogador tem uma série de chances para adivinhar o resultado correto. Se o jogador falhar, o jogo termina e o jogador perde.
-
-No Python, podemos criar um jogo de adivinhação usando a biblioteca `random`. A biblioteca `random` contém funções que geram números aleatórios. Para criar um jogo de adivinhação, precisamos usar a função `random.randint()`. Esta função gera um número aleatório entre dois números que são passados como parâmetros.
-
-Em nosso exemplo, vamos criar um jogo de adivinhação simples. O jogador terá que adivinhar um número entre 1 e 10. Se o jogador acertar, ele ganha; caso contrário, ele perde.
-
-Vamos começar importando a biblioteca `random`:
-
-```python
-import random
-
-```
-
-Em seguida, vamos gerar um número aleatório entre 1 e 10 usando a função `random.randint()`:
-
-```python
-numero_secreto = random.randint(1, 10)
-
-```
-
-Agora, vamos iniciar um laço `while` para dar ao jogador 10 chances de adivinhar o número:
-
-```python
-tentativas = 0
-
-while tentativas < 10:
-    tentativa = int(input("Adivinhe o número secreto (entre 1 e 10): "))
-    tentativas += 1
-
-    if tentativa == numero_secreto:
-        print("Parabéns! Você acertou!")
-        break
-    else:
-        print("Você errou! Tente novamente.")
-
-```
-
-Se o jogador adivinhar o número, o jogo acabará e ele ganhará; caso contrário, o jogo continuará até que o jogador exceda 10 tentativas. Se isso acontecer, o jogo acabará e o jogador perderá.
-
-Esse é um exemplo simples de como criar um jogo de adivinhação em Python. Você pode aprimorar esse jogo adicionando um sistema de pontuação ou adicionando mais níveis de dificuldade.
 
 ## Conta Corrente
 
