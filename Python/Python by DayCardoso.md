@@ -751,13 +751,82 @@ Neste exemplo, a função `caminhar()` pode ser chamada com qualquer objeto, ind
 
 Herança é quando você pode criar classes filhas que herdam atributos e funções do pai. Eles são frequentemente usados quando você tem uma classe abrangente mais geral, mas deseja definir classes mais específicas que podem ser semelhantes, mas não exatamente iguais. Fazemos isso para evitar copiar e colar um zilhão de vezes.
 
-Neste vídeo, usamos cães como exemplo de como a herança pode ser usada. Demonstro como criar uma classe pai (superclasse) e uma classe filha (subclasse) e inicializar ambas.
+Neste exemplo, usamos cães como exemplo de como a herança pode ser usada. Demonstro como criar uma classe pai (superclasse) e uma classe filha (subclasse) e inicializar ambas.
 
-Também podemos ter herança múltipla, que é quando uma subclasse pode ter vários pais e herdar as funções e atributos exclusivos de ambos. Um exemplo é um doodle dourado!
+Também podemos ter herança múltipla, que é quando uma subclasse pode ter vários pais e herdar as funções e atributos exclusivos de ambos. Um exemplo é o `ViraLata`!
 
 O polimorfismo está relacionado à herança. Polimorfismo significa assumir muitas formas. Em OOP, isso geralmente está relacionado a subclasses que substituem o método pai para que a classe mais específica possa seguir um conjunto diferente de instruções. No meu exemplo, uso diferentes latidos de diferentes raças de cachorros.
 
-Em termos práticos, usei isso em projetos anteriores para explicar as pequenas diferenças nas subclasses. Por exemplo, se estivermos calculando o custo de um objeto, talvez uma subclasse seja definida nos EUA e outra classe seja específica da França. . Poderíamos fazer isso com instruções if, mas elas podem se tornar repetitivas e confusas. O polimorfismo é uma maneira mais limpa de implementar algo assim.
+```python
+class Cachorro:
+    def __init__(self, nome, idade, amigavel):
+        self.nome = nome
+        self.idade = idade
+        self.amigavel = amigavel
+
+    def gosta_de_passear(self):
+        # Todo cachorro gosta depassear então sempre Thrue
+        return True 
+    
+    def latido(self):
+        return 'Woooof!'
+    
+class Caramelo(Cachorro):
+    def __init__(self, nome, idade, amigavel):
+        super().__init__(nome, idade, amigavel)
+        
+    def brincalhao(self):
+        return "Fiquei esperando o dia todo pra você brincar comigo!"
+    
+    def latido(self):
+        return 'AuAu Auu!'
+    
+class GoldenRetriever(Cachorro):
+    def __init__(self, nome, idade, amigavel):
+        super().__init__(nome, idade, amigavel)
+        
+    def bagunceiro(self):
+        return "Amo fazer uma bagunça, não deixa um chinelo ou uma carteira na minha frente que eu mastigo hahhaha"
+    
+    #def latido(self):
+    #    return 'Hauf hauf hauf!'
+
+class HuskySiberiano(Cachorro):
+    def __init__(self, nome, idade, amigavel):
+        super().__init__(nome, idade, amigavel)
+        
+    def barulhento(self):
+        return "Eu só to tentando te contar como foi o meu dia!!"
+    
+    def latido(self):
+        return 'wuff, wuff; wau!'
+        
+class ViraLata(Caramelo, GoldenRetriever):
+    def __init__(self, nome, idade, amigavel):
+        super().__init__(nome, idade, amigavel)
+        
+    def latido(self):
+       return 'voff, voff!'
+    
+
+bebeto = Caramelo('Bebeto', 3, 10)
+
+print("Seu nome é {}, ele tem {} anos e seu nivel de amabilidade é {}/10".format(bebeto.nome, bebeto.idade, bebeto.amigavel))
+print("Ele gosta de passear? R: {}".format(bebeto.gosta_de_passear()))
+
+pitchula = ViraLata('Pitchula', 12, 10)
+
+#Note que eu não declarei brincalhao ou bagunceiro em ViraLata mas ele herdou isso dos pais.
+print(pitchula.brincalhao(),"\n",pitchula.bagunceiro()) 
+
+lily = GoldenRetriever('Lily', 7, 10)
+romeu = HuskySiberiano('Romeu', 5, 10)
+
+# Usando polimorfismo
+cachorros = [bebeto, pitchula, romeu, lily]
+for raca in cachorros:
+    print("Meu nome é {} e eu faço {}".format(raca.nome,raca.latido()))
+```
 
 ### Segue mais dois exemplos para ajudar a entender o conceito de orientação a objeto e herança em Python:
 
@@ -1129,78 +1198,3 @@ Além disso, é possível usar vários outros métodos de tupla para realizar ta
 [5. Data Structures](https://docs.python.org/3/tutorial/datastructures.html)
 
 [3.11.1 Documentation](https://docs.python.org/pt-br/3/index.html)
-
-## Jogo de Adivinhação
-
-### Jogo de Adivinhação
-
-Um jogo de adivinhação é um jogo divertido no qual o jogador tenta adivinhar o resultado gerado aleatoriamente. O jogador tem uma série de chances para adivinhar o resultado correto. Se o jogador falhar, o jogo termina e o jogador perde.
-
-No Python, podemos criar um jogo de adivinhação usando a biblioteca `random`. A biblioteca `random` contém funções que geram números aleatórios. Para criar um jogo de adivinhação, precisamos usar a função `random.randint()`. Esta função gera um número aleatório entre dois números que são passados como parâmetros.
-
-Em nosso exemplo, vamos criar um jogo de adivinhação simples. O jogador terá que adivinhar um número entre 1 e 10. Se o jogador acertar, ele ganha; caso contrário, ele perde.
-
-Vamos começar importando a biblioteca `random`:
-
-```python
-import random
-
-```
-
-Em seguida, vamos gerar um número aleatório entre 1 e 10 usando a função `random.randint()`:
-
-```python
-numero_secreto = random.randint(1, 10)
-
-```
-
-Agora, vamos iniciar um laço `while` para dar ao jogador 10 chances de adivinhar o número:
-
-```python
-tentativas = 0
-
-while tentativas < 10:
-    tentativa = int(input("Adivinhe o número secreto (entre 1 e 10): "))
-    tentativas += 1
-
-    if tentativa == numero_secreto:
-        print("Parabéns! Você acertou!")
-        break
-    else:
-        print("Você errou! Tente novamente.")
-
-```
-
-Se o jogador adivinhar o número, o jogo acabará e ele ganhará; caso contrário, o jogo continuará até que o jogador exceda 10 tentativas. Se isso acontecer, o jogo acabará e o jogador perderá.
-
-Esse é um exemplo simples de como criar um jogo de adivinhação em Python. Você pode aprimorar esse jogo adicionando um sistema de pontuação ou adicionando mais níveis de dificuldade.
-
-## Conta Corrente
-
-```python
-class ContaCorrente:
-    
-    def __init__(self, codigo_conta):
-        self.codigo_conta = codigo_conta
-        self.saldo = 0
-        
-    def deposita(self, valor):
-        self.saldo += valor
-    
-    def __str__(self):
-        return "[>> Codigo {} Saldo {} <<]".format(self.codigo_conta, self.saldo)
-    
-
-conta_da_day = ContaCorrente(57)
-conta_da_day.deposita(2548)
-
-conta_do_luca = ContaCorrente(2765)
-conta_do_luca.deposita(1250)
-
-contas = [conta_da_day,conta_do_luca]
-#print(contas) # Nao imprime da forma que eu gostaria 
-#Imprime: [<__main__.ContaCorrente object at 0x000001FD4201F110>, <__main__.ContaCorrente object at 0x000001FD4201F190>]
-
-for conta in contas: #Nao entendi em que momento o variavel "conta" foi crianda
-    print(conta)
-```
