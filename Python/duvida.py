@@ -18,23 +18,23 @@ conta_da_day.deposita(2548)
 conta_do_luca = ContaCorrente(2765)
 conta_do_luca.deposita(1250)
 
-contas = [conta_da_day,conta_do_luca]
-for conta in contas:
-  print(conta)
+#contas = [conta_da_day,conta_do_luca]
+#for conta in contas:
+#  print(conta)
 
-def deposita_para_todos(contas):
-    for conta in contas: 
-        conta.deposita(200)
+#def deposita_para_todos(contas):
+#    for conta in contas: 
+#        conta.deposita(200)
 
-deposita_para_todos(contas)
-print(contas[0],contas[1])
+#deposita_para_todos(contas)
+#print(contas[0],contas[1])
 
 contas = (conta_da_day,conta_do_luca)
 
 contas[0].deposita(300)
 
 for conta in contas:
-  print(conta)
-  
-#for conta in contas:
-#    print(contas[conta])
+    print(conta)
+     
+for conta in contas:
+    print(contas[conta])

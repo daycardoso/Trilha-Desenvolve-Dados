@@ -1197,39 +1197,4 @@ Além disso, é possível usar vários outros métodos de tupla para realizar ta
 
 [5. Data Structures](https://docs.python.org/3/tutorial/datastructures.html)
 
-<<<<<<< HEAD
 [3.11.1 Documentation](https://docs.python.org/pt-br/3/index.html)
-=======
-[3.11.1 Documentation](https://docs.python.org/pt-br/3/index.html)
-
-
-## Conta Corrente
-
-```python
-class ContaCorrente:
-    
-    def __init__(self, codigo_conta):
-        self.codigo_conta = codigo_conta
-        self.saldo = 0
-        
-    def deposita(self, valor):
-        self.saldo += valor
-    
-    def __str__(self):
-        return "[>> Codigo {} Saldo {} <<]".format(self.codigo_conta, self.saldo)
-    
-
-conta_da_day = ContaCorrente(57)
-conta_da_day.deposita(2548)
-
-conta_do_luca = ContaCorrente(2765)
-conta_do_luca.deposita(1250)
-
-contas = [conta_da_day,conta_do_luca]
-#print(contas) # Nao imprime da forma que eu gostaria 
-#Imprime: [<__main__.ContaCorrente object at 0x000001FD4201F110>, <__main__.ContaCorrente object at 0x000001FD4201F190>]
-
-for conta in contas: #Nao entendi em que momento o variavel "conta" foi crianda
-    print(conta)
-```
->>>>>>> 68d551061839bbab1bf9726de85637f7b6923cbf
