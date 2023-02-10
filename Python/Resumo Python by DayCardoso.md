@@ -52,10 +52,28 @@ Descubra o que é a linguagem de programação Python e como ela pode ser usada.
 
 ### Tipos de Variáveis
 
-<aside>
-💡 O Python utiliza por convenção o padrão ***Snake_Case*** para nomes de variáveis (ou identificadores).
+```
+class Pessoa:
+    def __init__(self, nome, idade, endereco):
+        self.nome = nome
+        self.idade = idade
+        self.endereco = endereco
 
-Um exemplo de variáveis em ***Snake_Case*** são:
+    def __lt__(self, outra):
+        if self.idade != outra.idade:
+            return self.idade < outra.idade
+        return self.nome < outra.nome
+
+pessoas = [Pessoa("João", 35, "Rua A"), Pessoa("Maria", 30, "Rua B"), Pessoa("Pedro", 40, "Rua C")]
+
+for pessoa in sorted(pessoas):
+    print(pessoa.nome, pessoa.idade)
+```
+
+<aside>
+💡 O Python utiliza por convenção o padrão **s*nake_case*** para nomes de variáveis (ou identificadores).
+
+Um exemplo de variáveis em **s*nake_case*** são:
 
 ```python
 idade_esposa = 20
@@ -739,7 +757,7 @@ Polimorfismo é um conceito importante da orientação a objetos que permite que
 
 Por exemplo, você pode criar uma função genérica que aceita qualquer objeto como seu argumento e chama o método `caminhar()` desse objeto. Se o argumento for um objeto da classe `Pessoa`, a função chamará `Pessoa.caminhar()`. Se o argumento for um objeto da classe `Estudante`, a função chamará `Estudante.caminhar()`.
 
-```
+```python
 def caminhar(objeto):
     objeto.caminhar()
 
@@ -976,6 +994,144 @@ for raca in cachorros:
 > Neste exemplo, a classe **`Crianca`** herda todos os atributos e comportamentos da classe **`Avatar`**, além de adicionar um novo atributo e comportamento. Desta forma, você pode reutilizar o código da classe **`Avatar`** e ainda assim ter a flexibilidade de adicionar ou modificar atributos e comportamentos específicos da classe **`Crianca`**.
 > 
 
+### Duck typing
+
+Duck typing é um paradigma de programação orientada a objetos que segue a premissa de que "se algo parece um pato e anda como um pato, então deve ser um pato". Em outras palavras, ao invés de verificar explicitamente se um objeto pertence a determinada classe, o código que usa o objeto simplesmente verifica se o objeto possui os métodos e atributos necessários - não importa a classe do objeto. Com o duck typing, o código pode trabalhar facilmente com objetos de classes diferentes, desde que eles possuam os mesmos métodos e atributos.
+
+### Utilizar o `__eq__`
+
+A função `__eq__` ****é utilizada em Python para implementar a operação de igualdade (==) entre objetos de uma classe. A utilização desta função permite que os objetos da classe sejam comparados de maneira específica, e não apenas comparados pelo endereço de memória, como é o caso padrão.  O `__eq__`é um método especial que deve ser definido por qualquer classe que deseja suportar comparações.  Por exemplo, se um objeto possui atributos nome e idade, você pode definir o método `__eq__` para que dois objetos sejam considerados iguais se os seus atributos nome e idade forem iguais.
+
+Para usar o `__eq__`, você precisa criar um método `__eq__`dentro da classe que deseja comparar. O método `__eq__`deve ter pelo menos um parâmetro e deve retornar um valor booleano (True ou False).
+
+- **Quando devemos usar o `__eq__`?**
+
+ O `__eq__` é útil quando queremos comparar objetos de diferentes classes para verificar se eles possuem os mesmos atributos. Por exemplo, se você estiver trabalhando com objetos que possuem nome e idade, poderá usar o `__eq__` para verificar se dois objetos possuem o mesmo nome e a mesma idade.
+
+Usar o `__eq__` também é útil quando queremos verificar se dois objetos são iguais. Isso significa que se dois objetos possuírem os mesmos atributos, eles serão considerados iguais. Isso pode ser útil se você quiser verificar se dois objetos em uma lista são iguais ou se um objeto já existe em uma lista.
+
+O exemplo a seguir mostra como definir e usar o método `__eq__`para comparar dois objetos da classe Aluno:
+
+```python
+class Aluno:
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+
+    def __eq__(self, outro):
+        return self.nome == outro.nome and self.idade == outro.idade
+
+aluno1 = Aluno('João', 20)
+aluno2 = Aluno('João', 20)
+
+if aluno1 == aluno2:
+    print('Os alunos são iguais.')
+else:
+    print('Os alunos são diferentes.')
+
+# A saída deste código será:
+#	'Os alunos são iguais.'
+```
+
+### Usar o `isinstance`
+
+Usar o `isinstance` em Python é uma forma de verificar se um objeto pertence a determinada classe ou tipo. Por exemplo, você pode usar o `isinstance` para verificar se um objeto é do tipo `int`, `str`, `list` ou `dict`. Isso é útil quando você está trabalhando com objetos de classes diferentes e precisa verificar se eles são do mesmo tipo.
+
+Quando usar o `isinstance` depende do que você está tentando alcançar. Por exemplo, se você estiver trabalhando com objetos de classes diferentes e precisar verificar se eles são do mesmo tipo, o `isinstance` pode ser útil. Se você estiver verificando se um objeto pertence a uma determinada classe, o `isinstance` também pode ser útil. Além disso, o `isinstance` pode ser usado para verificar se um objeto é uma instância de uma determinada classe ou de qualquer uma de suas subclasses.
+
+Usar o `isinstance` é uma forma eficiente de verificar se um objeto pertence a determinada classe ou se ele é do mesmo tipo que outro objeto. Ao usar o `isinstance`, você pode ter certeza de que está verificando corretamente os tipos de objetos, o que é útil para evitar erros de execução. Além disso, usar o `isinstance` é mais eficiente do que usar a função padrão `type`, pois o `isinstance` não precisa verificar a herança da classe.
+
+A sintaxe de **`isinstance`** é:
+
+```python
+scssCopy code
+isinstance(obj, cls)
+```
+
+Onde **`obj`** é o objeto a ser verificado e **`cls`** é a classe ou tipo que desejamos comparar.
+
+Exemplo:
+
+```python
+pythonCopy code
+class Pessoa:
+    pass
+
+class Funcionario(Pessoa):
+    pass
+
+funcionario = Funcionario()
+
+print(isinstance(funcionario, Funcionario)) # True
+print(isinstance(funcionario, Pessoa)) # True
+print(isinstance(funcionario, object)) # True
+print(isinstance(funcionario, str)) # False
+```
+
+Neste exemplo, a classe **`Funcionario`** é uma subclasse de **`Pessoa`**, então a expressão **`isinstance(funcionario, Pessoa)`** retorna **`True`**. Além disso, todas as classes em Python são subclasses de **`object`**, por isso **`isinstance(funcionario, object)`** também retorna **`True`**.
+
+### Usar o `__lt__`
+
+O método `__lt__` é usado em Python para implementar a operação de comparação menor que (<). A utilização desta função permite que os objetos da classe sejam comparados de maneira específica, e não apenas comparados pelo endereço de memória, como é o caso padrão. O `__lt__` é um método especial que deve ser definido por qualquer classe que deseja suportar comparações.
+
+- **Quando devemos usar o `__lt__`?**
+
+O `__lt__` é útil quando queremos verificar se um objeto é menor que outro. Por exemplo, se um objeto possui um atributo chamado `idade`, você pode usar o `__lt__` para verificar se uma idade é menor que a outra.
+
+Usar o `__lt__` também é útil quando queremos ordenar objetos de acordo com determinadas condições. Por exemplo, se você estiver trabalhando com objetos que possuem nome e idade, poderá usar o `__lt__` para ordenar os objetos pela idade.
+
+Exemplo: Imagine que você tem uma classe **`Pessoa`** que representa informações sobre uma pessoa, incluindo nome, idade e endereço. Se você quiser ordenar uma lista de objetos da classe **`Pessoa`** por idade, você precisaria definir o método **`__lt__`** para que o operador "menor que" compare as idades das pessoas.
+
+```python
+class Pessoa:
+    def __init__(self, nome, idade, endereco):
+        self.nome = nome
+        self.idade = idade
+        self.endereco = endereco
+
+    def __lt__(self, outra):
+        return self.idade < outra.idade
+
+pessoas = [Pessoa("João", 35, "Rua A"), Pessoa("Maria", 30, "Rua B"), Pessoa("Pedro", 40, "Rua C")]
+
+for pessoa in sorted(pessoas):
+    print(pessoa.nome, pessoa.idade)
+
+# Saída:
+# Maria 30
+# João 35
+# Pedro 40
+```
+
+Sem o método **`__lt__`**, a função **`sorted`** não saberia como comparar os objetos da classe **`Pessoa`**, resultando em um erro.
+
+- Mas e se algum deles tiver a mesma idade? Posso ter um segunda regra
+
+```python
+class Pessoa:
+    def __init__(self, nome, idade, endereco):
+        self.nome = nome
+        self.idade = idade
+        self.endereco = endereco
+
+    def __lt__(self, outra):
+        if self.idade != outra.idade:
+            return self.idade < outra.idade
+        return self.nome < outra.nome
+
+pessoas = [Pessoa("João", 30, "Rua A"), Pessoa("Maria", 30, "Rua B"), Pessoa("Pedro", 40, "Rua C")]
+
+for pessoa in sorted(pessoas):
+    print(pessoa.nome, pessoa.idade)
+
+# Saída:
+# João 30
+# Maria 30
+# Pedro 40
+```
+
+Usar o `__lt__` é uma forma eficiente de verificar se um objeto é menor que outro ou de ordenar objetos de acordo com determinadas condições. Ao usar o `__lt__`, você pode ter certeza de que está verificando corretamente os tipos de objetos, o que é útil para evitar erros de execução.
+
 # Collections
 
 No Python, as Collections são estruturas de dados especializadas que permitem armazenar e acessar dados de maneira eficiente. Existem vários tipos de Collections disponíveis no Python, incluindo `listas`, `tuplas`, `dicionários` e `conjuntos`.
@@ -1013,7 +1169,7 @@ conjunto = {1, 2, 3}
 
 </aside>
 
-### Listas
+## Listas
 
 Uma das principais formas de trabalhar com listas em Python é usando os métodos de lista. Os métodos de lista são funções especiais que nos permitem realizar tarefas comuns com listas, como adicionar, remover, modificar e procurar elementos.
 
@@ -1089,7 +1245,7 @@ print(lista) # [1, 2, 3, 4, 5, 6]
 
 Além disso, é possível usar vários outros métodos de lista para realizar tarefas com listas, como `pop()`, `reverse()`, `count()` e `index()`. Para obter mais informações sobre esses métodos, consulte a [documentação do Python](https://docs.python.org/3/tutorial/datastructures.html).
 
-### Tuplas
+## Tuplas
 
 Tuplas são úteis para armazenar dados que não devem ser alterados. Por exemplo, imagine que você tem um conjunto de dados que representam as coordenadas de um lugar, como latitude e longitude. Uma tupla é uma estrutura de dados ideal para armazenar esses dados, pois uma vez criadas, as tuplas não podem ser alteradas.
 
@@ -1193,8 +1349,453 @@ print(nome_cidade) # Rio de Janeiro
 
 Além disso, é possível usar vários outros métodos de tupla para realizar tarefas com tuplas, como  `index()` ,`count()` ,`len()`, `sum()` e `max()`. Para obter mais informações sobre esses métodos, consulte a [documentação do Python](https://docs.python.org/3/tutorial/datastructures.html).
 
+## Conjuntos
+
+Um **conjunto** é uma coleção **não ordenada de elementos únicos**. Os conjuntos são úteis para armazenar dados que não podem ser repetidos, como nomes de usuário, IDs de produtos e números de lote.
+
+Um dos principais usos dos conjuntos é **descobrir se um elemento existe em um conjunto**. Por exemplo, imagine que você tem um conjunto de nomes de usuário e precisa descobrir se um determinado nome de usuário existe no conjunto. Você pode usar o operador `in` para verificar se o nome de usuário está no conjunto:
+
+```python
+# Um conjunto de nomes de usuário
+usuarios = {'joao', 'maria', 'ana'}
+
+# Verificando se o nome de usuário "joao" existe no conjunto
+if 'joao' in usuarios:
+    print('O nome de usuário "joao" existe no conjunto')
+```
+
+Além disso, os conjuntos também são úteis para realizar **operações matemáticas, como união, intersecção e diferença**. Por exemplo, imagine que você tem dois conjuntos de números e precisa encontrar os números que estão presentes em ambos os conjuntos. Você pode usar o operador `&` para realizar a intersecção entre os conjuntos:
+
+```python
+# Um conjunto de números
+conjunto_a = {1, 2, 3, 4, 5}
+
+# Outro conjunto de números
+conjunto_b = {3, 4, 5, 6, 7}
+
+# Encontrando os números que estão presentes em ambos os conjuntos
+intersecao = conjunto_a & conjunto_b
+
+print(intersecao) # {3, 4, 5}
+```
+
+Outra operação matemática comum é a união. Por exemplo, imagine que você tem dois conjuntos de números e precisa encontrar os números que estão em pelo menos um dos conjuntos. Você pode usar o operador `|` para realizar a união entre os conjuntos:
+
+```python
+# Um conjunto de números
+conjunto_a = {1, 2, 3, 4, 5}
+
+# Outro conjunto de números
+conjunto_b = {3, 4, 5, 6, 7}
+
+# Encontrando os números que estão presentes em pelo menos um dos conjuntos
+uniao = conjunto_a | conjunto_b
+
+print(uniao) # {1, 2, 3, 4, 5, 6, 7}
+```
+
+Por fim, os conjuntos também são úteis para **remover elementos duplicados de uma lista**. Por exemplo, imagine que você tem uma lista de números e precisa remover os números duplicados da lista. Você pode usar o método `set()` para converter a lista em um conjunto e, em seguida, usar o método `list()` para converter o conjunto em uma lista sem elementos duplicados:
+
+```python
+# Uma lista com números duplicados
+lista = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+
+# Convertendo a lista em um conjunto
+conjunto = set(lista)
+
+# Convertendo o conjunto em uma lista sem elementos duplicados
+lista_sem_duplicados = list(conjunto)
+
+print(lista_sem_duplicados)
+```
+
+Em Python, você pode usar o operador `-` para remover elementos repetidos de dois conjuntos. O operador `-` realiza a operação de subtração set, ou seja, retorna um novo conjunto com os elementos presentes no primeiro conjunto, mas não no segundo.
+
+Por exemplo:
+
+```python
+# Um conjunto de números
+conjunto_a = {1, 2, 3, 4, 5}
+
+# Outro conjunto de números
+conjunto_b = {3, 4, 5, 6, 7}
+
+# Encontrando os números que estão presentes no conjunto_a,
+# mas não estão presentes no conjunto_b
+diferenca = conjunto_a - conjunto_b
+
+print(diferenca) # {1, 2}
+```
+
+Já o operador `^` exclusivo, também conhecido como operador XOR, retorna um conjunto com os elementos presentes em um dos conjuntos, mas não em ambos Você pode usar o operador `^` para criar um conjunto exclusivo:
+
+```python
+# Um conjunto de números
+conjunto_a = {1, 2, 3, 4, 5}
+
+# Outro conjunto de números
+conjunto_b = {3, 4, 5, 6, 7}
+
+# Encontrando os números que estão presentes em pelo menos um dos conjuntos,
+# mas não em ambos
+conjunto_exclusivo = conjunto_a ^ conjunto_b
+
+print(conjunto_exclusivo) # {1, 2, 6, 7}
+```
+
+### Adicionando elementos em um conjunto
+
+Em Python, você pode usar o método `add()` para adicionar um novo elemento a um conjunto. Por exemplo, imagine que você tem um conjunto de nomes de usuário e precisa adicionar um novo nome de usuário. Você pode usar o método `add()` para adicionar o novo nome ao conjunto:
+
+```python
+# Um conjunto de nomes de usuário
+usuarios = {'joao', 'maria', 'ana'}
+
+# Adicionando um novo nome de usuário
+usuarios.add('pedro')
+
+print(usuarios) # {'joao', 'maria', 'ana', 'pedro'}
+```
+
+Além do método `add()`, você também pode usar o método `update()` para adicionar múltiplos elementos a um conjunto. Por exemplo, imagine que você tem um conjunto de números e precisa adicionar vários números ao conjunto. Você pode usar o método `update()` para adicionar os números ao conjunto:
+
+```python
+# Um conjunto de números
+numeros = {1, 2, 3, 4}
+
+# Adicionando múltiplos números ao conjunto
+numeros.update([5, 6, 7, 8])
+
+print(numeros) # {1, 2, 3, 4, 5, 6, 7, 8}
+```
+
+Além disso, você também pode usar o operador `|` para adicionar os elementos de um conjunto a outro. Por exemplo, imagine que você tem dois conjuntos de números e precisa adicionar os números do primeiro conjunto ao segundo conjunto. Você pode usar o operador `|` para adicionar os números:
+
+```python
+# Um conjunto de números
+conjunto_a = {1, 2, 3, 4}
+
+# Outro conjunto de números
+conjunto_b = {3, 4, 5, 6}
+
+# Adicionando os elementos do conjunto_a ao conjunto_b
+conjunto_b |= conjunto_a
+
+print(conjunto_b) # {1, 2, 3, 4, 5, 6}
+```
+
+## Dicionários
+
+Um **dicionário** é uma coleção **não ordenada de pares chave-valor**. Os dicionários são úteis para armazenar conjuntos de dados que estão relacionados, como um nome e um endereço de e-mail.  A sintaxe de um dicionário em Python é muito simples. Você pode criar um dicionário usando a sintaxe de colchetes `{}` e adicionar elementos ao dicionário usando a sintaxe de atribuição `key: value`. 
+
+Por exemplo, você pode criar um dicionário contendo o nome e o endereço de e-mail de uma pessoa e armazená-lo para acessar facilmente os dados:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de uma pessoa
+pessoa = {'nome':'João', 'email': 'joao@example.com'}
+
+# Imprimindo o nome da pessoa
+print(pessoa['nome']) # João
+
+# Imprimindo o endereço de e-mail da pessoa
+print(pessoa['email']) # joao@example.com
+```
+
+Os dicionários também são úteis para **acessar dados usando chaves**. Por exemplo, imagine que você tem um dicionário contendo o nome e o endereço de e-mail de várias pessoas e deseja recuperar o endereço de e-mail de uma pessoa específica. Você pode usar a chave `'email'` para recuperar o endereço de e-mail da pessoa:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de várias pessoas
+pessoas = {
+    'joao': {'nome':'João', 'email': 'joao@example.com'},
+    'maria': {'nome':'Maria', 'email': 'maria@example.com'},
+    'ana': {'nome':'Ana', 'email': 'ana@example.com'}
+}
+
+# Imprimindo o endereço de e-mail da pessoa "ana"
+print(pessoas['ana']['email']) # ana@example.com
+```
+
+Além disso, você também pode usar os métodos `keys()`, `values()` e `items()` para iterar sobre um dicionário. Por exemplo, imagine que você tem um dicionário contendo o nome e o endereço de e-mail de várias pessoas e deseja imprimir os nomes de todas as pessoas. Você pode usar o método `values()` para recuperar os nomes de todas as pessoas:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de várias pessoas
+pessoas = {
+    'joao': {'nome':'João', 'email': 'joao@example.com'},
+    'maria': {'nome':'Maria', 'email': 'maria@example.com'},
+    'ana': {'nome':'Ana', 'email': 'ana@example.com'}
+}
+
+# Iterando sobre o dicionário e imprimindo os nomes de todas as pessoas
+for nome in pessoas.values():
+    print(nome['nome'])
+
+# João
+# Maria
+# Ana
+```
+
+Além disso, os dicionários também são úteis para **armazenar dados em cache**. Por exemplo, imagine que você tem um dicionário contendo os resultados de uma consulta a um banco de dados e dese
+
+### Adicionando elementos a um dicionário
+
+Em Python, você pode usar o método `update()` para adicionar um novo par chave-valor a um dicionário. Por exemplo, imagine que você tem um dicionário contendo o nome e o endereço de e-mail de uma pessoa e precisa adicionar um novo par chave-valor ao dicionário. Você pode usar o método `update()` para adicionar o novo par:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de uma pessoa
+pessoa = {'nome':'João', 'email': 'joao@example.com'}
+
+# Adicionando um novo par chave-valor ao dicionário
+pessoa.update({'idade': 20})
+
+print(pessoa) # {'nome': 'João', 'email': 'joao@example.com', 'idade': 20}
+```
+
+Além disso, você também pode usar o operador `[]` para adicionar um novo par chave-valor ao dicionário. Por exemplo, imagine que você tem um dicionário contendo o nome e o endereço de e-mail de uma pessoa e deseja adicionar um novo par chave-valor ao dicionário. Você pode usar o operador `[]` para adicionar o novo par:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de uma pessoa
+pessoa = {'nome':'João', 'email': 'joao@example.com'}
+
+# Adicionando um novo par chave-valor ao dicionário
+pessoa['idade'] = 20
+
+print(pessoa) # {'nome': 'João', 'email': 'joao@example.com', 'idade': 20}
+```
+
+### Removendo elementos de um dicionário
+
+Em Python, você pode usar o método `pop()` para remover um elemento do dicionário. Por exemplo, imagine que você tem um dicionário contendo o nome e o endereço de e-mail de uma pessoa e deseja remover o nome da pessoa do dicionário. Você pode usar o método `pop()` para remover o nome:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de uma pessoa
+pessoa = {'nome':'João', 'email': 'joao@example.com'}
+
+# Removendo o nome da pessoa do dicionário
+pessoa.pop('nome')
+
+print(pessoa) # {'email': 'joao@example.com'}
+```
+
+Além disso, você também pode usar o método `del` para remover um elemento do dicionário. Por exemplo, imagine que você tem um dicionário contendo o nome e o endereço de e-mail de uma pessoa e deseja remover o nome da pessoa do dicionário. Você pode usar o método `del` para remover o nome:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de uma pessoa
+pessoa = {'nome':'João', 'email': 'joao@example.com'}
+
+# Removendo o nome da pessoa do dicionário
+del pessoa['nome']
+
+print(pessoa) # {'email': 'joao@example.com'}
+```
+
+### Verificando se um elemento está presente em um dicionário
+
+Em Python, você pode usar o operador `in` para verificar se um elemento está presente em um dicionário. Por exemplo, imagine que você tem um dicionário contendo o nome e o endereço de e-mail de uma pessoa e deseja verificar se a chave `'nome'` está presente no dicionário. Você pode usar o operador `in` para verificar se a chave está presente no dicionário:
+
+```python
+# Um dicionário contendo o nome e o endereço de e-mail de uma pessoa
+pessoa = {'nome':'João', 'email': 'joao@example.com'}
+
+# Verificando se a chave 'nome' está presente no dicionário
+if 'nome' in pessoa:
+    print('A chave está presente no dicionário!')
+```
+
+### Recuperando o valor de uma chave específica em um dicionário
+
+Você também pode usar o método `get()` para recuperar o valor de uma chave específica em um dicionário. Por exemplo, imagine que você tem um dicionário contendo o nome, o endereço de e-mail e o número de telefone de uma pessoa e precisa recuperar o número de telefone da pessoa. Você pode usar o método `get()` para recuperar o número de telefone do dicionário:
+
+```python
+pessoa = {'nome': 'João', 'email': 'joao@example.com', 'telefone': '1234567890'}
+
+# Recuperando o número de telefone da pessoa
+numero_telefone = pessoa.get('telefone')
+
+print(numero_telefone) # 1234567890
+```
+
+### Usando o construtor `dict()`
+
+No Python, você pode usar o construtor `dict()` para criar um dicionário vazio. O construtor `dict()` aceita um argumento obrigatório, que pode ser uma sequência, um iterável ou outro dicionário. Se o argumento for uma sequência, o construtor `dict()` criará um dicionário com os pares chave-valor da sequência. Se o argumento for um iterável, o construtor `dict()` criará um dicionário com os pares chave-valor do iterável. Se o argumento for outro dicionário, o construtor `dict()` criará um dicionário com os pares chave-valor do dicionário. Por exemplo:
+
+```python
+# Criando um dicionário a partir de uma sequência
+dicionario = dict([('nome', 'João'), ('idade', 20)])
+
+# Imprimindo o dicionário
+print(dicionario) # {'nome': 'João', 'idade': 20}
+
+# Criando um dicionário a partir de uma lista de tuplas
+dicionario = dict([('nome', 'João'), ('idade', 20), ('email', 'joao@example.com')])
+
+# Imprimindo o dicionário
+print(dicionario) # {'nome': 'João', 'idade': 20, 'email': 'joao@example.com'}
+
+# Criando um dicionário a partir de outro dicionário
+dicionario_2 = {'sobrenome': 'Cardoso'}
+dicionario = dict(dicionario, **dicionario_2)
+
+# Imprimindo o dicionário
+print(dicionario) # {'nome': 'João', 'idade': 20, 'email': 'joao@example.com', 'sobrenome': 'Cardoso'}
+```
+
+### Quando e porque usar o `zip()` junto ao `dict()` em Python
+
+O `zip()` é uma função útil para combinar duas ou mais sequências em um único objeto. O objeto criado pelo `zip()` é um objeto iterável contendo tuplas, onde cada tupla contém um elemento de cada sequência.
+
+O `dict()`, por sua vez, é um construtor de dicionário que pode ser usado para criar um dicionário a partir de uma sequência de tuplas.
+
+Portanto, o `zip()` e o `dict()` podem ser usados em conjunto para criar um dicionário a partir de duas sequências. Por exemplo, imagine que você tem duas listas, uma contendo os nomes de usuário e outra contendo as senhas, e deseja criar um dicionário contendo os nomes de usuário e suas respectivas senhas. Você pode usar o `zip()` para combinar as duas listas e o `dict()` para criar o dicionário:
+
+```python
+# Uma lista de nomes de usuário
+usuarios = ['joao', 'maria', 'ana']
+
+# Uma lista de senhas
+senhas = ['123', '456', '789']
+
+# Criando um dicionário contendo os nomes de usuário e suas respectivas senhas
+dicionario = dict(zip(usuarios, senhas))
+
+print(dicionario) # {'joao': '123', 'maria': '456', 'ana': '789'}
+```
+
+Outro exemplo:
+
+```python
+# Uma lista de nomes de usuário
+usuarios = ['joao', 'maria', 'ana']
+
+# Criando um dicionário contendo os nomes de usuário e suas respectivas senhas
+dicionario = dict(zip(usuarios, ['123', '456', '789']))
+
+print(dicionario) # {'joao': '123', 'maria': '456', 'ana': '789'}
+```
+
+**Como percorrer linha a linha em um dicionário?**
+
+Para percorrer linha a linha em um dicionário, você pode usar o método `items()`. Por exemplo:
+
+```python
+dic = {'chave1': 'valor1', 'chave2': 'valor2'}
+for key, valor in dic.items():
+    print(key, valor)
+
+# O código acima imprimirá chave1 valor1 e chave2 valor2
+```
+
+## `defaultdict`
+
+O `defaultdict` é um construtor de dicionário que permite que você especifique o valor padrão que será retornado quando o dicionário não contém uma chave específica. Por exemplo, imagine que você tem um dicionário contendo nomes e idades e deseja recuperar a idade de uma pessoa, mas não há nenhuma entrada no dicionário para a pessoa. O `defaultdict` permite que você especifique um valor padrão para retornar caso não haja uma entrada correspondente no dicionário. Por exemplo:
+
+```python
+from collections import defaultdict
+
+# Um dicionário contendo nomes e idades
+dic = defaultdict(lambda: -1)
+dic['joao'] = 20
+dic['maria'] = 25
+
+# Recuperando a idade de uma pessoa, mas não há nenhuma entrada no dicionário para a pessoa
+idade = dic['ana']
+
+# Imprimindo a idade
+print(idade) # -1
+```
+
+No exemplo acima, o `defaultdict` foi instanciado com o valor padrão `-1`. Portanto, quando você tentou recuperar a idade de `ana`, que não está presente no dicionário, o `defaultdict` retornou `-1`.
+
+### Counter
+
+O Counter é um contador de objetos disponível no módulo collections do Python. Ele é usado para contar a quantidade de vezes que um objeto ou elemento aparece em uma sequência. Ele retorna um objeto do tipo Counter que é um dicionário que mapeia os elementos da sequência à sua contagem. Por exemplo, imagine que você tem uma lista de elementos e deseja contar a quantidade de vezes que cada elemento aparece na lista. Você pode usar o Counter para contar a quantidade de vezes que cada elemento aparece na lista:
+
+```python
+from collections import Counter
+
+# Uma lista de elementos
+lista = ['a', 'b', 'c', 'a', 'a', 'b']
+
+# Contando a quantidade de vezes que cada elemento aparece na lista
+contador = Counter(lista)
+
+print(contador) # Counter({'a': 3, 'b': 2, 'c': 1})
+```
+
 ### Referências
 
 [5. Data Structures](https://docs.python.org/3/tutorial/datastructures.html)
 
 [3.11.1 Documentation](https://docs.python.org/pt-br/3/index.html)
+
+## Jogo de Adivinhação
+
+### Jogo de Adivinhação
+
+Um jogo de adivinhação é um jogo divertido no qual o jogador tenta adivinhar o resultado gerado aleatoriamente. O jogador tem uma série de chances para adivinhar o resultado correto. Se o jogador falhar, o jogo termina e o jogador perde.
+
+No Python, podemos criar um jogo de adivinhação usando a biblioteca `random`. A biblioteca `random` contém funções que geram números aleatórios. Para criar um jogo de adivinhação, precisamos usar a função `random.randint()`. Esta função gera um número aleatório entre dois números que são passados como parâmetros.
+
+Em nosso exemplo, vamos criar um jogo de adivinhação simples. O jogador terá que adivinhar um número entre 1 e 10. Se o jogador acertar, ele ganha; caso contrário, ele perde.
+
+Vamos começar importando a biblioteca `random`:
+
+```python
+import random
+
+```
+
+Em seguida, vamos gerar um número aleatório entre 1 e 10 usando a função `random.randint()`:
+
+```python
+numero_secreto = random.randint(1, 10)
+
+```
+
+Agora, vamos iniciar um laço `while` para dar ao jogador 10 chances de adivinhar o número:
+
+```python
+tentativas = 0
+
+while tentativas < 10:
+    tentativa = int(input("Adivinhe o número secreto (entre 1 e 10): "))
+    tentativas += 1
+
+    if tentativa == numero_secreto:
+        print("Parabéns! Você acertou!")
+        break
+    else:
+        print("Você errou! Tente novamente.")
+
+```
+
+Se o jogador adivinhar o número, o jogo acabará e ele ganhará; caso contrário, o jogo continuará até que o jogador exceda 10 tentativas. Se isso acontecer, o jogo acabará e o jogador perderá.
+
+Esse é um exemplo simples de como criar um jogo de adivinhação em Python. Você pode aprimorar esse jogo adicionando um sistema de pontuação ou adicionando mais níveis de dificuldade.
+
+## Conta Corrente
+
+```python
+class ContaCorrente:
+    
+    def __init__(self, codigo_conta):
+        self.codigo_conta = codigo_conta
+        self.saldo = 0
+        
+    def deposita(self, valor):
+        self.saldo += valor
+    
+    def __str__(self):
+        return "[>> Codigo {} Saldo {} <<]".format(self.codigo_conta, self.saldo)
+    
+
+conta_da_day = ContaCorrente(57)
+conta_da_day.deposita(2548)
+
+conta_do_luca = ContaCorrente(2765)
+conta_do_luca.deposita(1250)
+
+contas = [conta_da_day,conta_do_luca]
+
+for conta in contas: #Nao entendi em que momento o variavel "conta" foi crianda
+    print(conta)
+```
